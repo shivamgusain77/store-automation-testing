@@ -8,7 +8,7 @@ class businessMethod {
   }
 
   async getTestDataForTestcases(data, testCaseName) {
-    let index = 0;
+    let index = -1;
     for (let i = 0; i < data.lenght; i++) {
       if (data.testcasedata[i].testname === testCaseName) {
         index = i;
