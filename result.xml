@@ -1,0 +1,10 @@
+<testsuites id="" name="" tests="1" failures="0" skipped="0" errors="0" time="5.850308">
+<testsuite name="tests\homePageTest.spec.js" timestamp="2026-03-11T15:00:57.296Z" hostname="TestSuite1" tests="1" failures="0" skipped="0" time="4.276" errors="0">
+<testcase name="TC-01 Home Page Check - Title" classname="tests\homePageTest.spec.js" time="4.276">
+<system-out>
+<![CDATA[STORE
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
