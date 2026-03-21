@@ -7,3 +7,5 @@ node_modules/
 /playwright/.cache/
 
 .env
+result.xml
+output/test-report/index.html
