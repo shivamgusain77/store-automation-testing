@@ -9,3 +9,4 @@ node_modules/
 .env
 result.xml
 output/test-report/index.html
+output/artifacts/.last-run.json
