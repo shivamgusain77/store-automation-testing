@@ -24,6 +24,17 @@ class assertion {
       throw new Error("Element : " + elementName + " is not visible. " + error.message);
     }
   }
+
+  async verifyTextEquals(actual, expected) {
+    let result = false;
+    try {
+      await this.expect(expected, "Actual Value :: " + actual + "Expcetd Value ::" + expected).toBe(actual);
+      result = true;
+    } catch (error) {
+      throw new Error("Test Failed: actual( " + actual + " ) & expected ( " + expected + " ) text");
+    }
+    return result;
+  }
 }
 
 module.exports = { assertion };

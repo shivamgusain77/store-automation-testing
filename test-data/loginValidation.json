@@ -1,0 +1,10 @@
+{
+  "testcasedata": [
+    {
+      "testname": "TC-01 Login Validation - Valid Credentials",
+      "data": {
+        "url": "https://www.demoblaze.com/"
+      }
+    }
+  ]
+}

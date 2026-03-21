@@ -23,8 +23,8 @@ export default defineConfig({
   projects: [
     {
       name: "Store UI Validation",
-      testDir: "./tests/ui-testing/",
-      testMatch: "**/homePageUiValidation.spec.js",
+      testDir: "./tests",
+      testMatch: "**/*.spec.js",
       use: { ...devices["Desktop Chrome"], headless: false },
     },
   ],

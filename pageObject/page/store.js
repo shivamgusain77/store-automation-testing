@@ -29,6 +29,24 @@ class storePage {
 
     await this.assert.verifyElementVisible(storeObject.copyrightText, "copyright text");
   }
+
+  async clickLoginButton() {
+    await this.action.waitForPageLoad();
+    await this.action.click(storeObject.logInButton, "log in button");
+  }
+
+  async performLogin() {
+    await this.action.waitForElement(storeObject.loginLabel, "login label");
+    await this.action.fill(storeObject.userNameInput, runconfig.username, "input username");
+    await this.action.fill(storeObject.passwordInput, runconfig.password, "input password");
+    await this.action.click(storeObject.loginButton, "login Button");
+  }
+
+  async verifyLogin() {
+    let loggenInUsername = await this.action.getInnerText(storeObject.loginUsername, "username");
+    loggenInUsername = loggenInUsername.split(" ")[1];
+    await this.assert.verifyTextEquals(runconfig.username, loggenInUsername);
+  }
 }
 
 module.exports = { storePage };
