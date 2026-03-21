@@ -6,6 +6,18 @@
         "url": "https://www.demoblaze.com/",
         "expectedTitle": "STORE"
       }
+    },
+    {
+      "testname": "TC-02 Home Page Check - Navigation Menu",
+      "data": {
+        "url": "https://www.demoblaze.com/"
+      }
+    },
+    {
+      "testname": "TC-03 Home Page Check - Footer Elements",
+      "data": {
+        "url": "https://www.demoblaze.com/"
+      }
     }
   ]
 }

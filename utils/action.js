@@ -34,6 +34,14 @@ class action {
   async typeSequentially(selector, text) {
     return await this.page.locator(selector).pressSequentially(text);
   }
+
+  async waitForPageLoad() {
+    await this.page.waitForLoadState("domcontentloaded");
+  }
+
+  async waitForNetworkIdle() {
+    await this.page.waitForLoadState("networkidle");
+  }
 }
 
 module.exports = { action };

@@ -28,4 +28,24 @@ test.describe("Regression Test Suite", async () => {
       await pageObjectContext.getAsset().verifyPageTitle(testData.expectedTitle);
     });
   });
+
+  test("TC-02 Home Page Check - Navigation Menu", async () => {
+    await test.step("Navigate to the application", async () => {
+      await pageObjectContext.getAction().navigateToURL(testData.url);
+    });
+
+    await test.step("Verify navigation menu visibility", async () => {
+      await pageObjectContext.getStorePage().verifyNavigationMenuVisible();
+    });
+  });
+
+  test("TC-03 Home Page Check - Footer Elements", async () => {
+    await test.step("Navigate to the application", async () => {
+      await pageObjectContext.getAction().navigateToURL(testData.url);
+    });
+
+    await test.step("Verify footer elements visibility", async () => {
+      await pageObjectContext.getStorePage().verifyFooterElementsVisible();
+    });
+  });
 });

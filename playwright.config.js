@@ -22,9 +22,9 @@ export default defineConfig({
 
   projects: [
     {
-      name: "UITestSuite1",
-      testDir: "./tests/ui-test1/",
-      testMatch: "**/navigateToApplication.spec.js",
+      name: "Store UI Validation",
+      testDir: "./tests/ui-testing/",
+      testMatch: "**/homePageUiValidation.spec.js",
       use: { ...devices["Desktop Chrome"], headless: false },
     },
   ],

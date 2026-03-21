@@ -1,4 +1,4 @@
-import { storePage } from "../pageObject/page/store";
+import { storePage } from "../pageObject/page/store.js";
 
 import { action } from "./action.js";
 

@@ -12,6 +12,23 @@ class storePage {
     this.action = new action(this.page, this.except, this.context);
     this.assert = new assertion(this.page, this.except, this.context);
   }
+
+  async verifyNavigationMenuVisible() {
+    await this.action.waitForPageLoad();
+
+    await this.assert.verifyElementVisible(storeObject.homeButton, "home button");
+    await this.assert.verifyElementVisible(storeObject.contactButton, "contact button");
+    await this.assert.verifyElementVisible(storeObject.aboutUsButton, "about us button");
+    await this.assert.verifyElementVisible(storeObject.cartButton, "cart button");
+    await this.assert.verifyElementVisible(storeObject.logInButton, "log in button");
+    await this.assert.verifyElementVisible(storeObject.signUpButton, "sign up button");
+  }
+
+  async verifyFooterElementsVisible() {
+    await this.action.waitForPageLoad();
+
+    await this.assert.verifyElementVisible(storeObject.copyrightText, "copyright text");
+  }
 }
 
 module.exports = { storePage };
