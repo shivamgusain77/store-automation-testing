@@ -1,4 +1,4 @@
-import test from "@playwrigt/test";
+import { test } from "@playwright/test";
 
 class businessMethod {
   constructor(page, expect, context) {
@@ -9,13 +9,13 @@ class businessMethod {
 
   async getTestDataForTestcases(data, testCaseName) {
     let index = -1;
-    for (let i = 0; i < data.lenght; i++) {
+    for (let i = 0; i < data.testcasedata.length; i++) {
       if (data.testcasedata[i].testname === testCaseName) {
         index = i;
         break;
       }
     }
-    return data.testcasedata[index];
+    return data.testcasedata[index].data;
   }
 }
 

@@ -2,7 +2,10 @@
   "testcasedata": [
     {
       "testname": "TC-01 Home Page Check - Title",
-      "data": {}
+      "data": {
+        "url": "https://www.demoblaze.com/",
+        "expectedTitle": "STORE"
+      }
     }
   ]
 }

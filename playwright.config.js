@@ -22,10 +22,10 @@ export default defineConfig({
 
   projects: [
     {
-      name: "TestSuite1",
-      testDir: "./tests/",
-      testMatch: "**/homePageTest.spec.js",
-      use: { ...devices["Desktop Chrome"] },
+      name: "UITestSuite1",
+      testDir: "./tests/ui-test1/",
+      testMatch: "**/navigateToApplication.spec.js",
+      use: { ...devices["Desktop Chrome"], headless: false },
     },
   ],
 });
