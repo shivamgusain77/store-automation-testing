@@ -43,7 +43,8 @@ class storePage {
   }
 
   async verifyLogin() {
-    let loggenInUsername = await this.action.getInnerText(storeObject.loginUsername, "username");
+    await this.action.waitForElement(storeObject.loginUsername, "logged in username");
+    let loggenInUsername = await this.action.getInnerText(storeObject.loginUsername, "logged in username");
     loggenInUsername = loggenInUsername.split(" ")[1];
     await this.assert.verifyTextEquals(runconfig.username, loggenInUsername);
   }

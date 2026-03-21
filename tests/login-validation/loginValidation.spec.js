@@ -22,7 +22,7 @@ test.describe("Login Validation Test Suite", async () => {
     await browserContext.close();
   });
 
-  test.only("TC-01 Login Validation - Valid Credentials", async () => {
+  test("TC-01 Login Validation - Valid Credentials", async () => {
     await test.step("Navigate to the application", async () => {
       await pageObjectContext.getAction().navigateToURL(testData.url);
     });
