@@ -1,10 +1,10 @@
-import { storePage } from "../pageObject/page/store.js";
+import { storePage } from '../pageObject/page/store.js';
 
-import { action } from "./action.js";
+import { action } from './action.js';
 
-import { assertion } from "./assertion.js";
+import { assertion } from './assertion.js';
 
-import { businessMethod } from "./businessMethods.js";
+import { businessMethod } from './businessMethods.js';
 
 class baseClass {
   constructor(page, expect, context) {

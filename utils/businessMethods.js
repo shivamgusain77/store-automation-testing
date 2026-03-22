@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test } from '@playwright/test';
 
 class businessMethod {
   constructor(page, expect, context) {

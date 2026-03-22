@@ -10,3 +10,4 @@ node_modules/
 result.xml
 output/test-report/index.html
 output/artifacts/.last-run.json
+.prettierrc

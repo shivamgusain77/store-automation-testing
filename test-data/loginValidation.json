@@ -2,9 +2,27 @@
   "testcasedata": [
     {
       "testname": "TC-01 Login Validation - Valid Credentials",
+      "data": {}
+    },
+    {
+      "testname": "TC-02 Login Validation - Invalid Password",
       "data": {
-        "url": "https://www.demoblaze.com/"
+        "invalidPassword": "qwert"
       }
+    },
+    {
+      "testname": "TC-03 Login Validation - Invalid Username",
+      "data": {
+        "invalidUsername": "qwert"
+      }
+    },
+    {
+      "testname": "TC-04 Logout Validation - User able to logout",
+      "data": {}
+    },
+    {
+      "testname": "TC-05 Login Validation - Session Persistent after refresh",
+      "data": {}
     }
   ]
 }

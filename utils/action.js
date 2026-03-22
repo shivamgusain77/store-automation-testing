@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { test } from '@playwright/test';
 
 class action {
   constructor(page, expect, context) {
@@ -36,30 +36,30 @@ class action {
   }
 
   async waitForPageLoad() {
-    return await this.page.waitForLoadState("domcontentloaded");
+    return await this.page.waitForLoadState('domcontentloaded');
   }
 
   async waitForNetworkIdle() {
-    return await this.page.waitForLoadState("networkidle");
+    return await this.page.waitForLoadState('networkidle');
   }
 
   async click(selector, elementName) {
-    return await this.page.locator(selector).click("Click on " + elementName);
+    return await this.page.locator(selector).click('Click on ' + elementName);
   }
 
   async waitForElement(selector, elementName) {
-    return await this.page.waitForSelector(selector, "Wait for " + elementName);
+    return await this.page.waitForSelector(selector, 'Wait for ' + elementName);
   }
 
   async fill(selector, text, elementName) {
     return await this.page
       .locator(selector)
-      .locator("visible=true")
-      .fill(text, "Fill " + elementName);
+      .locator('visible=true')
+      .fill(text, 'Fill ' + elementName);
   }
 
   async getInnerText(selector, elementName) {
-    return await this.page.locator(selector).innerText("Inner Text of " + elementName);
+    return await this.page.locator(selector).innerText('Inner Text of ' + elementName);
   }
 }
 

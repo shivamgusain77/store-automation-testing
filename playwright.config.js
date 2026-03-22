@@ -1,4 +1,4 @@
-import { defineConfig, devices } from "@playwright/test";
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   timeout: 30 * 30 * 1000,
@@ -9,23 +9,23 @@ export default defineConfig({
 
   retries: 0,
 
-  outputDir: "./output/artifacts",
+  outputDir: './output/artifacts',
 
   reporter: [
-    ["html", { outputFolder: "output/test-report", open: "never" }],
-    ["junit", { outputFile: "result.xml" }],
+    ['html', { outputFolder: 'output/test-report', open: 'never' }],
+    ['junit', { outputFile: 'result.xml' }],
   ],
 
-  workers: "100%",
+  workers: '100%',
 
   fullyParallel: true,
 
   projects: [
     {
-      name: "Store UI Validation",
-      testDir: "./tests",
-      testMatch: "**/*.spec.js",
-      use: { ...devices["Desktop Chrome"], headless: false },
+      name: 'Store UI Validation',
+      testDir: './tests',
+      testMatch: '**/*.spec.js',
+      use: { ...devices['Desktop Chrome'], headless: false },
     },
   ],
 });

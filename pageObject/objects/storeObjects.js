@@ -5,8 +5,12 @@ export const cartButton = "//div[@id='navbarExample']/ul//li/a[text()='Cart']";
 export const logInButton = "//div[@id='navbarExample']/ul//li/a[text()='Log in']";
 export const signUpButton = "//div[@id='navbarExample']/ul//li/a[text()='Sign up']";
 export const copyrightText = "//footer/p[text()='Copyright © Product Store']";
-export const loginLabel = "//h5[@id='logInModalLabel']";
-export const userNameInput = "//input[@id='loginusername']";
-export const passwordInput = "//input[@id='loginpassword']";
-export const loginButton = "//div[@class='modal-footer']/button[text() = 'Log in']";
-export const loginUsername = "//li/a[@id='nameofuser']";
+export const loginLabel = "//div[@class='login_logo']";
+export const userNameInput = "//input[@id='user-name']";
+export const passwordInput = "//input[@id='password']";
+export const loginButton = "//input[@id='login-button']";
+export const loginAppLogo = "//div[@class='app_logo']";
+export const loginErrorMessage =
+  "//button[@class='error-button']/parent::h3[contains(text(), 'Username and password do not match')]";
+export const burgerButton = "//button[@id='react-burger-menu-btn']";
+export const logoutButton = "//a[@id='logout_sidebar_link']";

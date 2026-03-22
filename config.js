@@ -1,4 +1,5 @@
-import "dotenv/config";
+import 'dotenv/config';
 
-export const username = process.env.email ?? "";
-export const password = process.env.password ?? "";
+export const username = process.env.email ?? '';
+export const password = process.env.password ?? '';
+export const siteURl = 'https://www.saucedemo.com/';
