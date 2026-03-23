@@ -1,0 +1,20 @@
+{
+  "testcasedata": [
+    {
+      "testname": "TC01 - Signup Validation - Sucessfull Signup",
+      "data": {
+        "signUpName": "automation-tester",
+        "signUpEmail": "automation-testing-local@gmail.com",
+        "dummyPassword": "@Dummy",
+        "firstName": "Shivam",
+        "lastName": "Tester",
+        "company": "TCS",
+        "address": "D-213 Nawada Housing Complex",
+        "state": "Delhi",
+        "city": "Dwarka",
+        "zipCode": "201012",
+        "mobileNumber": "9990045323"
+      }
+    }
+  ]
+}

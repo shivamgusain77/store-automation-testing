@@ -61,6 +61,10 @@ class action {
   async getInnerText(selector, elementName) {
     return await this.page.locator(selector).innerText('Inner Text of ' + elementName);
   }
+
+  async selectOption(selctor, optionName) {
+    return await this.page.locator(selctor).selectOption(optionName);
+  }
 }
 
 module.exports = { action };
