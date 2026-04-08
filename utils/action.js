@@ -65,6 +65,90 @@ class action {
   async selectOption(selctor, optionName) {
     return await this.page.locator(selctor).selectOption(optionName);
   }
+
+  async uploadFileForNonInput(locator, fileDir) {
+    const fileChoosePromise = this.page.waitForEvent('filechooser');
+    await this.clickVisibleElement(locator, 'click on file button');
+    const fileChooser = await fileChoosePromise;
+    await fileChooser.setFiles(fileDir);
+  }
+
+  async goBack() {
+    return await this.page.goBack();
+  }
+
+  async typeSequentially(selector, text) {
+    return await this.page.locator(selector).pressSequentially(text);
+  }
+
+  async hover(selector, description) {
+    console.log(`Hover on ${description}`);
+    return await this.page.hover(selector);
+  }
+
+  async clickVisibleElement(selector, description) {
+    return await this.page.locator(selector).locator('visible=true').click();
+  }
+
+  async clickNth(selector, index, description) {
+    return await this.page.locator(selector).nth(index).click();
+  }
+
+  async clickFirst(selector, description) {
+    return await this.page.locator(selector).first().click();
+  }
+
+  async clickLast(selector, description) {
+    return await this.page.locator(selector).last().click();
+  }
+
+  async getElementText(selector) {
+    return await this.page.locator(selector).textContent();
+  }
+
+  async getElementTextNth(selector, index) {
+    return await this.page.locator(selector).nth(index).textContent();
+  }
+
+  async getElementList(selector) {
+    return await this.page.locator(selector).all(); //return array
+  }
+
+  async getElementCount(selector) {
+    return await this.page.locator(selector).count(); //return a count(Integer)
+  }
+
+  async bringElementIntoView(selector) {
+    const element = this.page.locator(selector);
+    return await element.scrollIntoViewIfNeeded();
+  }
+
+  async keyPress(selector, key) {
+    return await this.page.press(selector, key);
+  }
+
+  async checkElementVisibility(selctor) {
+    return await this.page.locator(selctor).isVisible();
+  }
+
+  async getElementAttribute(selector, attribute) {
+    const textValue = await this.page.getAttribute(selector, attribute);
+    return textValue;
+  }
+
+  async getCheckBox(selector) {
+    return await this.page.locator(selector).isChecked();
+  }
+
+  async dragAndDrop(sourceSelector, targetSelector) {
+    const source = this.page.locator(sourceSelector);
+    const target = this.page.locator(targetSelector);
+    return source.DragTo(target);
+  }
+
+  async checkElementIsHIdden(selector) {
+    return await this.page.locator(selector).isHidden();
+  }
 }
 
 module.exports = { action };
