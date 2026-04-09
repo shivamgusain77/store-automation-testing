@@ -15,6 +15,25 @@
         "zipCode": "201012",
         "mobileNumber": "9990045323"
       }
+    },
+    {
+      "testname": "TC-02 Signup Validation- with exisitng mail",
+      "data": {
+        "signUpName": "automation-tester"
+      }
+    },
+    {
+      "testname": "TC-03 Signup Validation- Without filling required field",
+      "data": {
+        "signUpName": "automation-tester",
+        "signUpEmail": "automation-testing-local@gmail.com"
+      }
+    },
+    {
+      "testname": "TC-04 Signup Validation- Invalid email format",
+      "data": {
+        "signUpName": "automation-tester"
+      }
     }
   ]
 }

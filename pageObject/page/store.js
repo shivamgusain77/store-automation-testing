@@ -2,6 +2,7 @@ import { action } from '../../utils/action.js';
 import { assertion } from '../../utils/assertion.js';
 import * as runconfig from '../../config.js';
 import * as storeObject from '../objects/storeObjects.js';
+import * as constant from '../../utils/constants.js';
 
 class storePage {
   constructor(page, except, context) {
@@ -78,10 +79,10 @@ class storePage {
     await this.assert.verifyElementVisible(storeObject.loginLabel, 'login page logo');
   }
 
-  async signUp(data) {
+  async signUp(signUpName, signUpEmail) {
     await this.action.waitForElement(storeObject.signUpLabel, 'sign up label');
-    await this.action.fill(storeObject.signUpName, data.signUpName, 'sign up name');
-    await this.action.fill(storeObject.signUpEmail, data.signUpEmail, 'sign up email');
+    await this.action.fill(storeObject.signUpName, signUpName, 'sign up name');
+    await this.action.fill(storeObject.signUpEmail, signUpEmail, 'sign up email');
     await this.action.click(storeObject.signUpButton, 'signup button');
   }
 
@@ -101,6 +102,10 @@ class storePage {
     await this.action.fill(storeObject.city, data.city, 'city');
     await this.action.fill(storeObject.zipCode, data.zipCode, 'zipCode');
     await this.action.fill(storeObject.mobileNumber, data.mobileNumber, 'mobileNumber');
+    await this.clickCreateAccButton();
+  }
+
+  async clickCreateAccButton() {
     await this.action.click(storeObject.createAccountButton, 'create account button');
   }
 
@@ -132,6 +137,24 @@ class storePage {
       storeObject.accountDeletedMessage,
       ' account deleted message'
     );
+  }
+
+  async verifyEmailExistError() {
+    await this.assert.verifyElementVisible(
+      storeObject.emailExistErrorMessage,
+      'email exist error message'
+    );
+  }
+
+  async verifyFillRequiredFieldMessage() {
+    await this.assert.verifyBorwserErrorMessage(
+      storeObject.passwordSingUp,
+      constant.boswserErrorMessage
+    );
+  }
+
+  async verifyInvalidFormatErrorMessage(invalidInputErrorMessage) {
+    await this.assert.verifyBorwserErrorMessage(storeObject.signUpEmail, invalidInputErrorMessage);
   }
 }
 

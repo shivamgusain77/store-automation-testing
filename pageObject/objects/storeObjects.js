@@ -41,3 +41,4 @@ export const continueButton = "//a[@data-qa='continue-button']";
 export const loggedInUserName = '//i/following-sibling::b';
 export const deleteAccount = "//a[text()=' Delete Account']";
 export const accountDeletedMessage = "//h2[@data-qa='account-deleted']/b";
+export const emailExistErrorMessage = "//p[text()='Email Address already exist!']";

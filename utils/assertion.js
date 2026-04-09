@@ -41,6 +41,12 @@ class assertion {
     }
     return result;
   }
+
+  async verifyBorwserErrorMessage(selector, browserMessage) {
+    const message = await this.page.locator(selector).evaluate((el) => el.validationMessage);
+
+    await this.expect(message).toContain(browserMessage);
+  }
 }
 
 module.exports = { assertion };
