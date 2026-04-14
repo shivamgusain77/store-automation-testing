@@ -44,8 +44,19 @@ class assertion {
 
   async verifyBorwserErrorMessage(selector, browserMessage) {
     const message = await this.page.locator(selector).evaluate((el) => el.validationMessage);
-
     await this.expect(message).toContain(browserMessage);
+  }
+
+  async verifyElementContainsText(selector, text) {
+    const locatorText = await this.page.locator(selector);
+    return await this.expect(locatorText, `Verify element contains ${text} text`).toContainText(
+      text
+    );
+  }
+
+  async toHaveCountGreaterThan(selector, count, message) {
+    const locator = await this.page.locator(selector).count();
+    return await this.expect(locator, message).toBeGreaterThan(count);
   }
 }
 

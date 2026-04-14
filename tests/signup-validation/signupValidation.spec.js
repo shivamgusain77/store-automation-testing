@@ -10,7 +10,7 @@ let testData;
 let page;
 let browserContext;
 
-test.describe('Login Validation Test Suite', async () => {
+test.describe('SignUp Validation Test Suite', async () => {
   test.beforeEach(async ({ browser }) => {
     browserContext = await browser.newContext();
     page = await browserContext.newPage();
@@ -55,7 +55,7 @@ test.describe('Login Validation Test Suite', async () => {
     });
 
     await test.step('Enter name and  exisitng email and click on signup', async () => {
-      await pageObjectContext.getStorePage().signUp(testData.signUpName, runconfig.username);
+      await pageObjectContext.getStorePage().signUp(testData.signUpName, runconfig.email);
     });
 
     await test.step('Verify error message', async () => {

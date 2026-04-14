@@ -6,6 +6,8 @@ import { assertion } from './assertion.js';
 
 import { businessMethod } from './businessMethods.js';
 
+import { productPage } from '../pageObject/page/products.js';
+
 class baseClass {
   constructor(page, expect, context) {
     this.page = page;
@@ -16,6 +18,7 @@ class baseClass {
     this.assertion = new assertion(this.page, this.expect, this.context);
     this.storePage = new storePage(this.page, this.expect, this.context);
     this.businessMethod = new businessMethod(this.page, this.expect, this.context);
+    this.productPage = new productPage(this.page, this.expect, this.context);
   }
 
   getAction() {
@@ -32,6 +35,10 @@ class baseClass {
 
   getBusinessMethod() {
     return this.businessMethod;
+  }
+
+  getProductPage() {
+    return this.productPage;
   }
 }
 

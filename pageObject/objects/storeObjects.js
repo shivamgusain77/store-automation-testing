@@ -2,18 +2,17 @@ export const homeButton = "//div[@id='navbarExample']/ul//li/a[text()='Home ']";
 export const contactButton = "//div[@id='navbarExample']/ul//li/a[text()='Contact']";
 export const aboutUsButton = "//div[@id='navbarExample']/ul//li/a[text()='About us']";
 export const cartButton = "//div[@id='navbarExample']/ul//li/a[text()='Cart']";
-export const logInButton = "//div[@id='navbarExample']/ul//li/a[text()='Log in']";
 export const copyrightText = "//footer/p[text()='Copyright © Product Store']";
-export const loginLabel = "//div[@class='login_logo']";
-export const userNameInput = "//input[@id='user-name']";
-export const passwordInput = "//input[@id='password']";
-export const loginButton = "//input[@id='login-button']";
 export const loginAppLogo = "//div[@class='app_logo']";
 export const loginErrorMessage =
   "//button[@class='error-button']/parent::h3[contains(text(), 'Username and password do not match')]";
 export const burgerButton = "//button[@id='react-burger-menu-btn']";
 export const logoutButton = "//a[@id='logout_sidebar_link']";
 
+export const logInButton = "//button[@data-qa='login-button']";
+export const userNameInput = "//input[@data-qa='login-email']";
+export const passwordInput = "//input[@data-qa='login-password']";
+export const loginLabel = "//h2[text()='Login to your account']";
 export const signUpName = "//input[@data-qa='signup-name']";
 export const signUpEmail = "//input[@data-qa='signup-email']";
 export const signUpLabel = "//div[@class='signup-form']/h2";
@@ -42,3 +41,4 @@ export const loggedInUserName = '//i/following-sibling::b';
 export const deleteAccount = "//a[text()=' Delete Account']";
 export const accountDeletedMessage = "//h2[@data-qa='account-deleted']/b";
 export const emailExistErrorMessage = "//p[text()='Email Address already exist!']";
+export const productsButton = "//a[text()=' Products']";

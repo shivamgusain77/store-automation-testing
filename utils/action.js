@@ -149,6 +149,11 @@ class action {
   async checkElementIsHIdden(selector) {
     return await this.page.locator(selector).isHidden();
   }
+
+  async waitForUrl(url) {
+    const actualUrl = '**' + url;
+    return await this.page.waitForURL(actualUrl);
+  }
 }
 
 module.exports = { action };

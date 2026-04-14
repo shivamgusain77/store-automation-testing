@@ -13,3 +13,4 @@ export const invalidEmails = [
     expected: 'incomplete',
   },
 ];
+export const products = ['Saree', 'Top'];

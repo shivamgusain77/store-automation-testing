@@ -30,21 +30,16 @@ class storePage {
     await this.assert.verifyElementVisible(storeObject.copyrightText, 'copyright text');
   }
 
-  async clickLoginButton() {
-    await this.action.waitForPageLoad();
-    await this.action.click(storeObject.logInButton, 'log in button');
-  }
-
   async performLogin(data, operation) {
     await this.action.waitForElement(storeObject.loginLabel, 'login page logo');
     switch (operation) {
       case 'correct':
-        await this.action.fill(storeObject.userNameInput, runconfig.username, 'input username');
+        await this.action.fill(storeObject.userNameInput, runconfig.email, 'input username');
         await this.action.fill(storeObject.passwordInput, runconfig.password, 'input password');
         break;
 
       case 'invalid password':
-        await this.action.fill(storeObject.userNameInput, runconfig.username, 'input username');
+        await this.action.fill(storeObject.userNameInput, runconfig.email, 'input username');
         await this.action.fill(storeObject.passwordInput, data.invalidPassword, 'input password');
         break;
 
@@ -54,7 +49,7 @@ class storePage {
         break;
     }
 
-    await this.action.click(storeObject.loginButton, 'login Button');
+    await this.action.click(storeObject.logInButton, 'login Button');
   }
 
   async verifyLogin() {
@@ -123,12 +118,24 @@ class storePage {
     await this.action.click(storeObject.continueButton, 'continue button');
   }
 
-  async verfiyAccountUsername(data) {
-    const expectUsername = await this.action.getInnerText(
+  async verfiyAccountUsername(data, action) {
+    const actualUsername = await this.action.getInnerText(
       storeObject.loggedInUserName,
       'logged in username'
     );
-    await this.assert.verifyTextEquals(data.signUpName, expectUsername);
+    console.log(runconfig.username);
+    console.log(actualUsername);
+    switch (action.toLowerCase()) {
+      case 'login':
+        await this.assert.verifyTextEquals(runconfig.username, actualUsername);
+        break;
+      case 'signup':
+        await this.assert.verifyTextEquals(data.signUpName, actualUsername);
+        break;
+
+      default:
+        break;
+    }
   }
 
   async deleteAccount() {
@@ -155,6 +162,11 @@ class storePage {
 
   async verifyInvalidFormatErrorMessage(invalidInputErrorMessage) {
     await this.assert.verifyBorwserErrorMessage(storeObject.signUpEmail, invalidInputErrorMessage);
+  }
+
+  async clickOnProductsButton() {
+    await this.action.click(storeObject.productsButton, 'products button');
+    await this.action.waitForUrl('/products');
   }
 }
 
