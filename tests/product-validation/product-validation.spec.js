@@ -23,7 +23,7 @@ test.describe('Product Validation Test Suite', async () => {
     await browserContext.close();
   });
 
-  test('TC-01 Product Validation - search different products', async () => {
+  test.only('TC-01 Product Validation - search different products', async () => {
     await test.step('Navigate to the application', async () => {
       await pageObjectContext.getAction().navigateToURL(runconfig.siteURl);
     });
