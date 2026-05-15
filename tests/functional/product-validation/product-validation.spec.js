@@ -1,14 +1,16 @@
 import { test, expect } from '@playwright/test';
-import { baseClass } from '../../utils/baseClass.js';
-import { businessMethod } from '../../utils/businessMethods.js';
-import * as runconfig from '../../config.js';
-import * as constant from '../../utils/constants.js';
-const data = JSON.parse(JSON.stringify(require('../../test-data/productValidation.json')));
+import { baseClass } from '../../../utils/baseClass.js';
+import { businessMethod } from '../../../utils/businessMethods.js';
+import * as runconfig from '../../../config.js';
+import * as constant from '../../../utils/constants.js';
+const data = JSON.parse(JSON.stringify(require('../../../test-data/productValidation.json')));
 
 let pageObjectContext;
 let testData;
 let page;
 let browserContext;
+
+test.use({ storageState: 'auth/auth.json' });
 
 test.describe('Product Validation Test Suite', async () => {
   test.beforeEach(async ({ browser }) => {
@@ -46,5 +48,24 @@ test.describe('Product Validation Test Suite', async () => {
         await pageObjectContext.getProductPage().verifyProductResults(data);
       });
     }
+  });
+
+  test('TC-02 Product Validation - view product detail', async () => {
+    await test.step('Navigate to the application', async () => {
+      await pageObjectContext.getAction().navigateToURL(runconfig.siteURl);
+    });
+
+    await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getStorePage().clickOnProductsButton();
+    });
+
+    await test.step('Click view product of ' + testData.productName, async () => {
+      await pageObjectContext.getAction().waitForPageLoad();
+      await pageObjectContext.getProductPage().clickOnViewProduct(testData.productName);
+    });
+
+    await test.step('Verify product name in details page', async () => {
+      await pageObjectContext.getProductPage().verifyProductDetails(testData.productName);
+    });
   });
 });

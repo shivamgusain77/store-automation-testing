@@ -1,8 +1,8 @@
 import { test, expect } from '@playwright/test';
-import { baseClass } from '../../utils/baseClass.js';
-import { businessMethod } from '../../utils/businessMethods.js';
-import * as runconfig from '../../config.js';
-const data = JSON.parse(JSON.stringify(require('../../test-data/loginValidation.json')));
+import { baseClass } from '../../../utils/baseClass.js';
+import { businessMethod } from '../../../utils/businessMethods.js';
+import * as runconfig from '../../../config.js';
+const data = JSON.parse(JSON.stringify(require('../../../test-data/loginValidation.json')));
 
 let pageObjectContext;
 let testData;

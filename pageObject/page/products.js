@@ -31,6 +31,16 @@ class productPage {
       await this.assert.verifyElementContainsText(indexSelector, data);
     }
   }
+
+  async clickOnViewProduct(productName) {
+    const productDetailsXpath = productObject.viewProduct.replace('?????', productName);
+    await this.action.click(productDetailsXpath);
+  }
+
+  async verifyProductDetails(productName) {
+    const productDetail = await this.action.getInnerText(productObject.productInformation);
+    await this.assert.verifyTextEquals(productDetail, productName);
+  }
 }
 
 module.exports = { productPage };

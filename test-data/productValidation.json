@@ -3,6 +3,12 @@
     {
       "testname": "TC-01 Product Validation - search different products",
       "data": {}
+    },
+    {
+      "testname": "TC-02 Product Validation - view product detail",
+      "data": {
+        "productName": "Blue Top"
+      }
     }
   ]
 }

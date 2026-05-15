@@ -25,6 +25,18 @@ export default defineConfig({
       name: 'Store UI Validation',
       testDir: './tests',
       testMatch: '**/*.spec.js',
+      dependencies: ['App Login'],
+      use: {
+        ...devices['Desktop Chrome'],
+        headless: false,
+        viewport: { width: 1920, height: 1080 },
+        deviceScaleFactor: 1,
+      },
+    },
+    {
+      name: 'App Login',
+      testDir: './tests/login/',
+      testMatch: '**/login.spec.js',
       use: {
         ...devices['Desktop Chrome'],
         headless: false,

@@ -58,6 +58,10 @@ class assertion {
     const locator = await this.page.locator(selector).count();
     return await this.expect(locator, message).toBeGreaterThan(count);
   }
+
+  async verifyURL(url, description) {
+    return await this.expect(this.page, `URL of ${description} page`).toHaveURL(url);
+  }
 }
 
 module.exports = { assertion };
