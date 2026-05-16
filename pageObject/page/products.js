@@ -34,12 +34,32 @@ class productPage {
 
   async clickOnViewProduct(productName) {
     const productDetailsXpath = productObject.viewProduct.replace('?????', productName);
-    await this.action.click(productDetailsXpath);
+    await this.action.click(productDetailsXpath, productName);
   }
 
-  async verifyProductDetails(productName) {
-    const productDetail = await this.action.getInnerText(productObject.productInformation);
-    await this.assert.verifyTextEquals(productDetail, productName);
+  async viewUsingCategory(category, subCategory) {
+    await this.action.click(productObject.productsCategory.replace('?????', category));
+    await this.action.click(productObject.productsSubCategory.replace('?????', subCategory));
+  }
+
+  async verifyProductPageTitle(category, subCategory) {
+    const actualProductPageTitle = await this.action.getInnerText(
+      productObject.titleProductsPage,
+      'products page title'
+    );
+    const expectedProductPageTitle = `${category} - ${subCategory} Products`;
+    await this.assert.verifyTextEquals(
+      actualProductPageTitle.toLowerCase(),
+      expectedProductPageTitle.toLowerCase()
+    );
+  }
+
+  async getPriceOfProduct(productName) {
+    const productPrice = await this.action.getFirstInnerText(
+      productObject.productPrice,
+      productName
+    );
+    return productPrice;
   }
 }
 

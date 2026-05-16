@@ -30,7 +30,7 @@ class storePage {
     await this.assert.verifyElementVisible(storeObject.copyrightText, 'copyright text');
   }
 
-  async performLogin(operation, data = 'not required') {
+  async performLogin(operation, data = {}) {
     await this.action.waitForElement(storeObject.loginLabel, 'login page logo');
     switch (operation) {
       case 'correct':

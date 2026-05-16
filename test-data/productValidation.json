@@ -9,6 +9,19 @@
       "data": {
         "productName": "Blue Top"
       }
+    },
+    {
+      "testname": "TC-03 Product Validation - search product by category",
+      "data": {
+        "category": "Women",
+        "subCategory": "Dress"
+      }
+    },
+    {
+      "testname": "TC-04 Product Validation - verify product price",
+      "data": {
+        "productName": "Men Tshirt"
+      }
     }
   ]
 }

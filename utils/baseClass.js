@@ -8,6 +8,8 @@ import { businessMethod } from './businessMethods.js';
 
 import { productPage } from '../pageObject/page/products.js';
 
+import { productDetailsPage } from '../pageObject/page/productDetails.js';
+
 class baseClass {
   constructor(page, expect, context) {
     this.page = page;
@@ -19,13 +21,14 @@ class baseClass {
     this.storePage = new storePage(this.page, this.expect, this.context);
     this.businessMethod = new businessMethod(this.page, this.expect, this.context);
     this.productPage = new productPage(this.page, this.expect, this.context);
+    this.productDetailsPage = new productDetailsPage(this.page, this.expect, this.context);
   }
 
   getAction() {
     return this.action;
   }
 
-  getAsset() {
+  getAssert() {
     return this.assertion;
   }
 
@@ -39,6 +42,10 @@ class baseClass {
 
   getProductPage() {
     return this.productPage;
+  }
+
+  getProductDetailPage() {
+    return this.productDetailsPage;
   }
 }
 

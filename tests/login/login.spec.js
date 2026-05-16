@@ -8,7 +8,7 @@ test('TC-01 Product Validation - search different products', async ({ browser })
   const pageContext = new baseClass(newPage, expect, browser);
   await pageContext.getAction().navigateToURL(runconfig.siteURl);
   await pageContext.getStorePage().performLogin('correct');
-  await pageContext.getAsset().verifyURL('https://automationexercise.com/', 'Login');
+  await pageContext.getAssert().verifyURL('https://automationexercise.com/', 'Login');
   await context.storageState({ path: 'auth/auth.json' });
   await context.close();
 });

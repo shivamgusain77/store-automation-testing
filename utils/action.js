@@ -44,22 +44,23 @@ class action {
   }
 
   async click(selector, elementName) {
-    return await this.page.locator(selector).click('Click on ' + elementName);
+    console.log(`[STEP] Click on ${elementName}`);
+    return await this.page.locator(selector).click();
   }
 
   async waitForElement(selector, elementName) {
-    return await this.page.waitForSelector(selector, 'Wait for ' + elementName);
+    console.log(`[INFO] Wait for ${elementName}`);
+    return await this.page.waitForSelector(selector);
   }
 
   async fill(selector, text, elementName) {
-    return await this.page
-      .locator(selector)
-      .locator('visible=true')
-      .fill(text, 'Fill ' + elementName);
+    console.log(`[STEP] Enter ${elementName}`);
+    return await this.page.locator(selector).locator('visible=true').fill(text);
   }
 
   async getInnerText(selector, elementName) {
-    return await this.page.locator(selector).innerText('Inner Text of ' + elementName);
+    console.log(`[INFO] Getting inner text of ${elementName}`);
+    return await this.page.locator(selector).innerText();
   }
 
   async selectOption(selctor, optionName) {
@@ -82,7 +83,7 @@ class action {
   }
 
   async hover(selector, description) {
-    console.log(`Hover on ${description}`);
+    console.log(`[STEP] Hover on ${description}`);
     return await this.page.hover(selector);
   }
 
@@ -153,6 +154,11 @@ class action {
   async waitForUrl(url) {
     const actualUrl = '**' + url;
     return await this.page.waitForURL(actualUrl);
+  }
+
+  async getFirstInnerText(selector, elementName) {
+    console.log(`[INFO] Getting inner text of ${elementName}`);
+    return await this.page.locator(selector).first().innerText();
   }
 }
 
