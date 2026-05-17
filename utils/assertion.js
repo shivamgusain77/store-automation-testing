@@ -62,6 +62,20 @@ class assertion {
   async verifyURL(url, description) {
     return await this.expect(this.page, `URL of ${description} page`).toHaveURL(url);
   }
+
+  async verifyTextConatins(actual, expected) {
+    let result = false;
+    try {
+      await this.expect(
+        actual,
+        'Actual Value :: ' + actual + 'Expcetd Value ::' + expected
+      ).toContain(expected);
+      result = true;
+    } catch (error) {
+      throw new Error('Test Failed: actual( ' + actual + ' ) & expected ( ' + expected + ' ) text');
+    }
+    return result;
+  }
 }
 
 module.exports = { assertion };

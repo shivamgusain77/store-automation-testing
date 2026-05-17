@@ -1,9 +1,10 @@
-import { test, expect } from '@playwright/test';
+import { expect } from '@playwright/test';
 import { baseClass } from '../../../utils/baseClass.js';
 import { businessMethod } from '../../../utils/businessMethods.js';
 import * as runconfig from '../../../config.js';
 import * as constant from '../../../utils/constants.js';
 const data = JSON.parse(JSON.stringify(require('../../../test-data/productValidation.json')));
+import { test } from '../../../fixtures/loginFixture.js';
 
 let pageObjectContext;
 let testData;
@@ -11,19 +12,17 @@ let page;
 let browserContext;
 let productPrice;
 
-test.use({ storageState: 'auth/auth.json' });
-
-test.describe('Product Validation Test Suite', async () => {
-  test.beforeEach(async ({ browser }) => {
-    browserContext = await browser.newContext();
-    page = await browserContext.newPage();
-    pageObjectContext = new baseClass(page, expect, browserContext);
-    let testContext = new businessMethod(page, expect, browserContext);
+test.describe('Product Validation Test Suite', () => {
+  test.beforeEach(async ({ loggedInPage }) => {
+    // browserContext = await browser.newContext();
+    // page = await browserContext.newPage();
+    pageObjectContext = new baseClass(loggedInPage, expect, loggedInPage.context());
+    let testContext = new businessMethod(loggedInPage, expect, loggedInPage.context());
     testData = await testContext.getTestDataForTestcases(data, test.info().title);
   });
 
-  test.afterEach(async () => {
-    await browserContext.close();
+  test.afterEach(async ({ loggedInPage }) => {
+    await loggedInPage.context().close();
   });
 
   test('TC-01 Product Validation - search different products', async () => {
@@ -117,10 +116,57 @@ test.describe('Product Validation Test Suite', async () => {
     });
 
     await test.step('Verify product price in details', async () => {
+      await pageObjectContext.getAction().waitForPageLoad();
       const productPriceOnDetailPage = await pageObjectContext
         .getProductDetailPage()
-        .getProductPriceFromDetails();
+        .getProductPriceFromDetails(testData.productName);
       await pageObjectContext.getAssert().verifyTextEquals(productPrice, productPriceOnDetailPage);
+    });
+  });
+
+  test('TC-05 Product Validation - verify product description', async () => {
+    await test.step('Navigate to the application', async () => {
+      await pageObjectContext.getAction().navigateToURL(runconfig.siteURl);
+    });
+
+    await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getStorePage().clickOnProductsButton();
+    });
+
+    await test.step(`Search ${data.productName} and `, async () => {
+      await pageObjectContext.getProductPage().searchProduct(testData.productName);
+    });
+
+    await test.step('Go to product details', async () => {
+      await pageObjectContext.getProductPage().clickOnViewProduct(testData.productName);
+    });
+
+    await test.step('Verify product description', async () => {
+      await pageObjectContext
+        .getProductDetailPage()
+        .verifyProductDescriptions(testData.productName);
+    });
+  });
+
+  test('TC-06 Product Validation - verify product image loads', async () => {
+    await test.step('Navigate to the application', async () => {
+      await pageObjectContext.getAction().navigateToURL(runconfig.siteURl);
+    });
+
+    await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getStorePage().clickOnProductsButton();
+    });
+
+    await test.step(`Search ${data.productName} and `, async () => {
+      await pageObjectContext.getProductPage().searchProduct(testData.productName);
+    });
+
+    await test.step('Go to product details', async () => {
+      await pageObjectContext.getProductPage().clickOnViewProduct(testData.productName);
+    });
+
+    await test.step('Verify image loading', async () => {
+      await pageObjectContext.getProductDetailPage().verifyImageLoad();
     });
   });
 });

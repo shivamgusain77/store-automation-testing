@@ -14,3 +14,4 @@ export const invalidEmails = [
   },
 ];
 export const products = ['Saree', 'Top'];
+export const descriptionFields = ['Category', 'Availability', 'Condition', 'Brand'];

@@ -22,6 +22,18 @@
       "data": {
         "productName": "Men Tshirt"
       }
+    },
+    {
+      "testname": "TC-05 Product Validation - verify product description",
+      "data": {
+        "productName": "Men Tshirt"
+      }
+    },
+    {
+      "testname": "TC-06 Product Validation - verify product image loads",
+      "data": {
+        "productName": "Men Tshirt"
+      }
     }
   ]
 }

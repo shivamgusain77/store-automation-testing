@@ -160,6 +160,11 @@ class action {
     console.log(`[INFO] Getting inner text of ${elementName}`);
     return await this.page.locator(selector).first().innerText();
   }
+
+  async getAllInnerText(selector, elementName) {
+    console.log(`[INFO] Getting all inner text of ${elementName}`);
+    return await this.page.locator(selector).allInnerTexts();
+  }
 }
 
 module.exports = { action };

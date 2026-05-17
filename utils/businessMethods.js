@@ -17,6 +17,11 @@ class businessMethod {
     }
     return data.testcasedata[index].data;
   }
+
+  async closeAdIfAppears() {
+    //div[@id='card']
+    //div[@class='continue-prompt-text']
+  }
 }
 
 module.exports = { businessMethod };
