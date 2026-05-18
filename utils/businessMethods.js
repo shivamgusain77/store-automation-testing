@@ -1,10 +1,16 @@
 import { test } from '@playwright/test';
+import * as siteLandingPageObject from '../pageObject/objects/siteLandingPageObjects.js';
+import { action } from '../utils/action.js';
+import { assertion } from '../utils/assertion.js';
 
 class businessMethod {
   constructor(page, expect, context) {
     this.page = page;
     this.expect = expect;
     this.context = context;
+
+    this.action = new action(this.page, this.expect, this.context);
+    this.assert = new assertion(this.page, this.expect, this.context);
   }
 
   async getTestDataForTestcases(data, testCaseName) {
@@ -18,9 +24,11 @@ class businessMethod {
     return data.testcasedata[index].data;
   }
 
-  async closeAdIfAppears() {
-    //div[@id='card']
-    //div[@class='continue-prompt-text']
+  async closeAdPopup() {
+    const popupVisibility = await this.action.checkElementVisibility(siteLandingPageObject.popup);
+    if (popupVisibility) {
+      await this.action.click(siteLandingPageObject.popupCloseButton, 'Popup close button');
+    }
   }
 }
 

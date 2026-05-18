@@ -34,6 +34,18 @@
       "data": {
         "productName": "Men Tshirt"
       }
+    },
+    {
+      "testname": "TC-07 Product Validation - verify product add to cart",
+      "data": {
+        "productName": "Blue Top"
+      }
+    },
+    {
+      "testname": "TC-08 Product Validation - verify multiple product add to cart",
+      "data": {
+        "productName": ["Blue Top", "Men Tshirt"]
+      }
     }
   ]
 }

@@ -76,6 +76,10 @@ class assertion {
     }
     return result;
   }
+
+  async checkToBeTruthy(value) {
+    return await this.expect(value).toBeTruthy();
+  }
 }
 
 module.exports = { assertion };

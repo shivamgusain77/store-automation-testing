@@ -11,6 +11,7 @@ let testData;
 let page;
 let browserContext;
 let productPrice;
+let productPriceArray = [];
 
 test.describe('Product Validation Test Suite', () => {
   test.beforeEach(async ({ loggedInPage }) => {
@@ -35,6 +36,7 @@ test.describe('Product Validation Test Suite', () => {
     });
 
     await test.step('Verify login and navigate to products', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
       await pageObjectContext.getStorePage().verfiyAccountUsername(testData, 'login');
       await pageObjectContext.getStorePage().clickOnProductsButton();
     });
@@ -56,6 +58,7 @@ test.describe('Product Validation Test Suite', () => {
     });
 
     await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
       await pageObjectContext.getStorePage().clickOnProductsButton();
     });
 
@@ -75,6 +78,7 @@ test.describe('Product Validation Test Suite', () => {
     });
 
     await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
       await pageObjectContext.getStorePage().clickOnProductsButton();
     });
 
@@ -98,6 +102,7 @@ test.describe('Product Validation Test Suite', () => {
     });
 
     await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
       await pageObjectContext.getStorePage().clickOnProductsButton();
     });
 
@@ -130,6 +135,7 @@ test.describe('Product Validation Test Suite', () => {
     });
 
     await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
       await pageObjectContext.getStorePage().clickOnProductsButton();
     });
 
@@ -154,6 +160,7 @@ test.describe('Product Validation Test Suite', () => {
     });
 
     await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
       await pageObjectContext.getStorePage().clickOnProductsButton();
     });
 
@@ -167,6 +174,76 @@ test.describe('Product Validation Test Suite', () => {
 
     await test.step('Verify image loading', async () => {
       await pageObjectContext.getProductDetailPage().verifyImageLoad();
+    });
+  });
+
+  test('TC-07 Product Validation - verify product add to cart', async () => {
+    await test.step('Navigate to the application', async () => {
+      await pageObjectContext.getAction().navigateToURL(runconfig.siteURl);
+    });
+
+    await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
+      await pageObjectContext.getStorePage().clickOnProductsButton();
+    });
+
+    await test.step(`Add ${testData.productName} to cart`, async () => {
+      await pageObjectContext.getProductPage().addProductToCart(testData.productName);
+    });
+
+    await test.step(`Get ${testData.productName} price`, async () => {
+      productPrice = await pageObjectContext
+        .getProductPage()
+        .getPriceOfProduct(testData.productName);
+    });
+
+    await test.step('Go to cart', async () => {
+      await pageObjectContext.getProductPage().clickOnCart();
+    });
+
+    await test.step('Verify product in cart', async () => {
+      await pageObjectContext.getCartPage().verifyItemInCart(testData.productName, productPrice);
+    });
+
+    await test.step('Delete items form cart', async () => {
+      await pageObjectContext.getCartPage().deleteItemsFromCart();
+    });
+  });
+
+  test('TC-08 Product Validation - verify multiple product add to cart', async () => {
+    await test.step('Navigate to the application', async () => {
+      await pageObjectContext.getAction().navigateToURL(runconfig.siteURl);
+    });
+
+    await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
+      await pageObjectContext.getStorePage().clickOnProductsButton();
+    });
+
+    for (const data of testData.productName) {
+      await test.step(`Add ${testData.productName} to cart`, async () => {
+        await pageObjectContext.getProductPage().addProductToCart(data);
+      });
+
+      await test.step(`Get ${data} price`, async () => {
+        const price = await pageObjectContext.getProductPage().getPriceOfProduct(data);
+        productPriceArray.push(price);
+      });
+    }
+
+    await test.step('Go to cart', async () => {
+      await pageObjectContext.getProductPage().clickOnCart();
+    });
+
+    let index = 0;
+    for (const data of testData.productName) {
+      await test.step(`Verify ${data} in cart`, async () => {
+        await pageObjectContext.getCartPage().verifyItemInCart(data, productPriceArray[index++]);
+      });
+    }
+
+    await test.step('Delete items form cart', async () => {
+      await pageObjectContext.getCartPage().deleteItemsFromCart();
     });
   });
 });

@@ -16,7 +16,7 @@ class productPage {
 
   async searchProduct(data) {
     await this.action.fill(productObject.productInput, data, `search ${data}`);
-    await this.action.click(productObject.productSreachBar, 'product sreach bar');
+    await this.action.click(productObject.productSreachBar, 'product search bar');
     await this.action.waitForNetworkIdle();
   }
 
@@ -56,10 +56,26 @@ class productPage {
 
   async getPriceOfProduct(productName) {
     const productPrice = await this.action.getFirstInnerText(
-      productObject.productPrice,
+      productObject.productPrice.replace('?????', productName),
       productName
     );
     return productPrice;
+  }
+
+  async addProductToCart(productName) {
+    await this.action.click(
+      productObject.productAddtoCart.replace('?????', productName),
+      productName
+    );
+    await this.closeContinueShoppingModal();
+  }
+
+  async closeContinueShoppingModal() {
+    await this.action.click(productObject.continueShoppingButton, 'Continue shopping button');
+  }
+
+  async clickOnCart() {
+    await this.action.click(productObject.cartButton, 'Cart button');
   }
 }
 
