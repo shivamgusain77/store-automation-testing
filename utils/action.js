@@ -50,7 +50,7 @@ class action {
 
   async waitForElement(selector, elementName) {
     console.log(`[INFO] Wait for ${elementName}`);
-    return await this.page.waitForSelector(selector);
+    return await this.page.waitForSelector(selector, { timeout: 5000 });
   }
 
   async fill(selector, text, elementName) {
@@ -63,8 +63,8 @@ class action {
     return await this.page.locator(selector).innerText();
   }
 
-  async selectOption(selctor, optionName) {
-    return await this.page.locator(selctor).selectOption(optionName);
+  async selectOption(selector, optionName) {
+    return await this.page.locator(selector).selectOption(optionName);
   }
 
   async uploadFileForNonInput(locator, fileDir) {
@@ -128,8 +128,8 @@ class action {
     return await this.page.press(selector, key);
   }
 
-  async checkElementVisibility(selctor) {
-    return await this.page.locator(selctor).isVisible();
+  async checkElementVisibility(selector) {
+    return await this.page.locator(selector).isVisible();
   }
 
   async getElementAttribute(selector, attribute) {

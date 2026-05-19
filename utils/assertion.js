@@ -80,6 +80,11 @@ class assertion {
   async checkToBeTruthy(value) {
     return await this.expect(value).toBeTruthy();
   }
+
+  async verifyCount(selector, count, elementName) {
+    const locator = this.page.locator(selector);
+    return await this.expect(locato, `Check count of ${elementName}`).toHaveCount(count);
+  }
 }
 
 module.exports = { assertion };

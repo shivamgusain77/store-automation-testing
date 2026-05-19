@@ -46,6 +46,18 @@
       "data": {
         "productName": ["Blue Top", "Men Tshirt"]
       }
+    },
+    {
+      "testname": "TC-09 Product Validation - verify item count in cart",
+      "data": {
+        "productName": ["Blue Top", "Men Tshirt", "Lace Top For Women"]
+      }
+    },
+    {
+      "testname": "TC-10 Product Validation - remove product from cart",
+      "data": {
+        "productName": ["Blue Top", "Men Tshirt", "Lace Top For Women"]
+      }
     }
   ]
 }

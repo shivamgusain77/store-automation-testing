@@ -12,6 +12,7 @@ let page;
 let browserContext;
 let productPrice;
 let productPriceArray = [];
+let totalProductQuantity;
 
 test.describe('Product Validation Test Suite', () => {
   test.beforeEach(async ({ loggedInPage }) => {
@@ -241,6 +242,78 @@ test.describe('Product Validation Test Suite', () => {
         await pageObjectContext.getCartPage().verifyItemInCart(data, productPriceArray[index++]);
       });
     }
+
+    await test.step('Delete items form cart', async () => {
+      await pageObjectContext.getCartPage().deleteItemsFromCart();
+    });
+  });
+
+  test('TC-09 Product Validation - verify item count in cart', async () => {
+    await test.step('Navigate to the application', async () => {
+      await pageObjectContext.getAction().navigateToURL(runconfig.siteURl);
+    });
+
+    await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
+      await pageObjectContext.getStorePage().clickOnProductsButton();
+    });
+
+    for (const data of testData.productName) {
+      await test.step(`Add ${testData.productName} to cart`, async () => {
+        await pageObjectContext.getProductPage().addProductToCart(data);
+      });
+    }
+
+    await test.step('Go to cart', async () => {
+      await pageObjectContext.getProductPage().clickOnCart();
+    });
+
+    await test.step('Verify items quantity in cart', async () => {
+      totalProductQuantity = await pageObjectContext.getCartPage().getProductsQuantity();
+      await pageObjectContext
+        .getCartPage()
+        .verifyProductsQuantity(testData.productName.length, totalProductQuantity);
+    });
+
+    await test.step('Delete items form cart', async () => {
+      await pageObjectContext.getCartPage().deleteItemsFromCart();
+    });
+  });
+
+  test('TC-10 Product Validation - remove product from cart', async () => {
+    await test.step('Navigate to the application', async () => {
+      await pageObjectContext.getAction().navigateToURL(runconfig.siteURl);
+    });
+
+    await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
+      await pageObjectContext.getStorePage().clickOnProductsButton();
+    });
+
+    for (const data of testData.productName) {
+      await test.step(`Add ${testData.productName} to cart`, async () => {
+        await pageObjectContext.getProductPage().addProductToCart(data);
+      });
+    }
+
+    await test.step('Go to cart', async () => {
+      await pageObjectContext.getProductPage().clickOnCart();
+    });
+
+    await test.step('Verify product quantity in cart', async () => {
+      totalProductQuantity = await pageObjectContext.getCartPage().getProductsQuantity();
+    });
+
+    await test.step('Remove an product from cart', async () => {
+      await pageObjectContext.getCartPage().removeCartItem(testData.productName[0]);
+    });
+
+    await test.step('Verify product qauntity after removal of a product', async () => {
+      const newTotalProductQuantity = await pageObjectContext.getCartPage().getProductsQuantity();
+      await pageObjectContext
+        .getCartPage()
+        .verifyProductsQuantity(totalProductQuantity - 1, newTotalProductQuantity);
+    });
 
     await test.step('Delete items form cart', async () => {
       await pageObjectContext.getCartPage().deleteItemsFromCart();

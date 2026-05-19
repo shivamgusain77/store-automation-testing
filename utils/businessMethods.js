@@ -25,9 +25,19 @@ class businessMethod {
   }
 
   async closeAdPopup() {
-    const popupVisibility = await this.action.checkElementVisibility(siteLandingPageObject.popup);
+    const popupVisibility = await this.checkElementVisibile(siteLandingPageObject.popup);
+    console.log(popupVisibility);
     if (popupVisibility) {
       await this.action.click(siteLandingPageObject.popupCloseButton, 'Popup close button');
+    }
+  }
+
+  async checkElementVisibile(selector) {
+    try {
+      await this.action.waitForElement(selector);
+      return true;
+    } catch {
+      return false;
     }
   }
 }

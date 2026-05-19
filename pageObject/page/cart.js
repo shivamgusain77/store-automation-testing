@@ -35,12 +35,34 @@ class cartPage {
 
   async deleteItemsFromCart() {
     let itemCount = await this.action.getElementCount(cartObject.productName);
-    const index = 0;
+    let index = 0;
     while (itemCount > 0) {
-      await this.action.clickNth(cartObject.deleteItem, index, `Delete Item`);
+      await this.action.clickNth(cartObject.deleteItem, index++, `Delete Item`);
       await this.action.waitForNetworkIdle();
       itemCount = await this.action.getElementCount(cartObject.productName);
     }
+  }
+
+  async getProductsQuantity() {
+    const itemCount = await this.action.getElementCount(cartObject.productName);
+    let actualItemQuantity = 0;
+    for (let i = 0; i < itemCount; i++) {
+      let itemQuantity = await this.action.getElementTextNth(cartObject.productQuantity, i);
+      itemQuantity = Number(itemQuantity);
+      actualItemQuantity += itemQuantity;
+    }
+    return actualItemQuantity;
+  }
+
+  async verifyProductsQuantity(expectedItemQuantity, actualItemQuantity) {
+    await this.assert.verifyTextEquals(expectedItemQuantity, actualItemQuantity);
+  }
+
+  async removeCartItem(productName) {
+    await this.action.click(
+      cartObject.productDeleteButton.replace('?????', productName),
+      `${productName} delete button`
+    );
   }
 }
 
