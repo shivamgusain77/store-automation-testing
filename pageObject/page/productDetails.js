@@ -58,6 +58,20 @@ class productDetailsPage {
     const response = await this.page.request.get(imageURL);
     await this.assert.verifyTextEquals(response.status(), 200);
   }
+
+  async submitProductReview(name, email, review) {
+    await this.action.fill(productDetailObject.nameInput, name, 'name');
+    await this.action.fill(productDetailObject.emailInput, email, 'email');
+    await this.action.fill(productDetailObject.productReview, review, 'review');
+    await this.action.click(productDetailObject.submitButton, 'review submit button');
+  }
+
+  async verifyReviewSubmitted() {
+    await this.assert.verifyElementVisible(
+      productDetailObject.reviewSubmitted,
+      'Review submit sucess message'
+    );
+  }
 }
 
 module.exports = { productDetailsPage };

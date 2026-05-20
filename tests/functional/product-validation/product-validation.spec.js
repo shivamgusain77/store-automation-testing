@@ -319,4 +319,33 @@ test.describe('Product Validation Test Suite', () => {
       await pageObjectContext.getCartPage().deleteItemsFromCart();
     });
   });
+
+  test('TC-11 Product Validation - verify product review submission', async () => {
+    await test.step('Navigate to the application', async () => {
+      await pageObjectContext.getAction().navigateToURL(runconfig.siteURl);
+    });
+
+    await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
+      await pageObjectContext.getStorePage().clickOnProductsButton();
+    });
+
+    await test.step(`Search ${data.productName} and `, async () => {
+      await pageObjectContext.getProductPage().searchProduct(testData.productName);
+    });
+
+    await test.step('Go to product details', async () => {
+      await pageObjectContext.getProductPage().clickOnViewProduct(testData.productName);
+    });
+
+    await test.step(`Submit ${testData.productName} review`, async () => {
+      await pageObjectContext
+        .getProductDetailPage()
+        .submitProductReview(testData.name, testData.email, testData.review);
+    });
+
+    await test.step(`Verify review submitted sucessfully`, async () => {
+      await pageObjectContext.getProductDetailPage().verifyReviewSubmitted();
+    });
+  });
 });

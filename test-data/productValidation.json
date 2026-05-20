@@ -58,6 +58,15 @@
       "data": {
         "productName": ["Blue Top", "Men Tshirt", "Lace Top For Women"]
       }
+    },
+    {
+      "testname": "TC-11 Product Validation - verify product review submission",
+      "data": {
+        "productName": "Men Tshirt",
+        "name": "Automation Tester",
+        "email": "automation.tester@gmail.com",
+        "review": "A very good product"
+      }
     }
   ]
 }
