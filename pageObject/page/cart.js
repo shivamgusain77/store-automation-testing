@@ -5,13 +5,16 @@ import * as cartObject from '../objects/cartObjects.js';
 import * as constant from '../../utils/constants.js';
 
 class cartPage {
-  constructor(page, except, context) {
-    this.except = except;
+  constructor(page, expect, context) {
+    this.expect = expect;
     this.page = page;
     this.context = context;
 
-    this.action = new action(this.page, this.except, this.context);
-    this.assert = new assertion(this.page, this.except, this.context);
+    this.action = new action(this.page, this.expect, this.context);
+    this.assert = new assertion(this.page, this.expect, this.context);
+
+    this.cartPageBreadcrumb = "//section[@id='cart_items']//ol/li[text()='Shopping Cart']";
+    this.emptyCartMessage = "//span[@id='empty_cart']//b[text()='Cart is empty!']";
   }
 
   async verifyItemInCart(productName, productPrice) {
@@ -63,6 +66,15 @@ class cartPage {
       cartObject.productDeleteButton.replace('?????', productName),
       `${productName} delete button`
     );
+  }
+
+  async verifyCartPageLoaded() {
+    await this.assert.verifyURL('**/view_cart', 'cart page');
+    await this.assert.verifyElementVisible(this.cartPageBreadcrumb, 'cart page breadcrumb');
+  }
+
+  async verifyCartEmpty() {
+    await this.assert.verifyElementVisible(this.emptyCartMessage, 'cart empty message');
   }
 }
 

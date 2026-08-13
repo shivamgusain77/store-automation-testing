@@ -1,0 +1,8 @@
+{
+  "testcasedata": [
+    {
+      "testname": "TC-01 Cart Validation - verify cart page loads and verify its empty",
+      "data": {}
+    }
+  ]
+}
