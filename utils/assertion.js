@@ -1,4 +1,4 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 class assertion {
   constructor(page, expect, context) {
@@ -84,6 +84,15 @@ class assertion {
   async verifyCount(selector, count, elementName) {
     const locator = this.page.locator(selector);
     return await this.expect(locato, `Check count of ${elementName}`).toHaveCount(count);
+  }
+
+  async verifyElementNotVisible(selector, elementName) {
+    const element = this.page.locator(selector);
+    try {
+      await this.expect(element, elementName + ' should be visible').toBeHidden();
+    } catch (error) {
+      throw new Error('Element : ' + elementName + ' is visible. ' + error.message);
+    }
   }
 }
 

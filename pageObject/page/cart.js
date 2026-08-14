@@ -1,5 +1,6 @@
 import { action } from '../../utils/action.js';
 import { assertion } from '../../utils/assertion.js';
+import { businessMethod } from '../../utils/businessMethods.js';
 import * as runconfig from '../../config.js';
 import * as cartObject from '../objects/cartObjects.js';
 import * as constant from '../../utils/constants.js';
@@ -12,9 +13,11 @@ class cartPage {
 
     this.action = new action(this.page, this.expect, this.context);
     this.assert = new assertion(this.page, this.expect, this.context);
+    this.businessMethod = new businessMethod(this.page, this.except, this.context);
 
     this.cartPageBreadcrumb = "//section[@id='cart_items']//ol/li[text()='Shopping Cart']";
     this.emptyCartMessage = "//span[@id='empty_cart']//b[text()='Cart is empty!']";
+    this.checkoutButton = "//a[contains(@class,'check_out') and text()='Proceed To Checkout']";
   }
 
   async verifyItemInCart(productName, productPrice) {
@@ -69,12 +72,20 @@ class cartPage {
   }
 
   async verifyCartPageLoaded() {
-    await this.assert.verifyURL('**/view_cart', 'cart page');
+    await this.assert.verifyURL(/\/view_cart$/, 'cart page');
     await this.assert.verifyElementVisible(this.cartPageBreadcrumb, 'cart page breadcrumb');
   }
 
   async verifyCartEmpty() {
     await this.assert.verifyElementVisible(this.emptyCartMessage, 'cart empty message');
+  }
+
+  async verifyCartNotEmpty() {
+    await this.assert.verifyElementNotVisible(this.emptyCartMessage, 'cart empty message');
+  }
+
+  async clickOnCheckout() {
+    await this.action.click(this.checkoutButton, 'checkout page button');
   }
 }
 

@@ -14,6 +14,7 @@ export default defineConfig({
   reporter: [
     ['html', { outputFolder: 'output/test-report', open: 'never' }],
     ['junit', { outputFile: 'result.xml' }],
+    ['list'],
   ],
 
   workers: '100%',
@@ -22,10 +23,10 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'Store UI Validation',
+      name: 'Store_UI_Validation',
       testDir: './tests',
       testMatch: '**/*.spec.js',
-      dependencies: ['App Login'],
+      dependencies: ['App_Login'],
       use: {
         ...devices['Desktop Chrome'],
         headless: false,
@@ -34,7 +35,7 @@ export default defineConfig({
       },
     },
     {
-      name: 'App Login',
+      name: 'App_Login',
       testDir: './tests/login/',
       testMatch: '**/login.spec.js',
       use: {

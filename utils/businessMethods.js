@@ -40,6 +40,11 @@ class businessMethod {
       return false;
     }
   }
+
+  async cleanPriceText(price) {
+    let cleanedPrice = price.split(' ')[1];
+    return cleanedPrice;
+  }
 }
 
 module.exports = { businessMethod };

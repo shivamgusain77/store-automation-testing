@@ -12,6 +12,8 @@ import { productDetailsPage } from '../pageObject/page/productDetails.js';
 
 import { cartPage } from '../pageObject/page/cart.js';
 
+import { checkoutPage } from '../pageObject/page/checkout.js';
+
 class baseClass {
   constructor(page, expect, context) {
     this.page = page;
@@ -25,6 +27,7 @@ class baseClass {
     this.productPage = new productPage(this.page, this.expect, this.context);
     this.productDetailsPage = new productDetailsPage(this.page, this.expect, this.context);
     this.cartPage = new cartPage(this.page, this.expect, this.context);
+    this.checkoutPage = new checkoutPage(this.page, this.expect, this.context);
   }
 
   getAction() {
@@ -53,6 +56,10 @@ class baseClass {
 
   getCartPage() {
     return this.cartPage;
+  }
+
+  getCheckoutPage() {
+    return this.checkoutPage;
   }
 }
 

@@ -1,5 +1,6 @@
 import { action } from '../../utils/action.js';
 import { assertion } from '../../utils/assertion.js';
+import { businessMethod } from '../../utils/businessMethods.js';
 import * as runconfig from '../../config.js';
 import * as productObject from '../objects/productObjects.js';
 import * as constant from '../../utils/constants.js';
@@ -12,6 +13,7 @@ class productPage {
 
     this.action = new action(this.page, this.except, this.context);
     this.assert = new assertion(this.page, this.except, this.context);
+    this.businessMethod = new businessMethod(this.page, this.except, this.context);
   }
 
   async searchProduct(data) {
@@ -55,10 +57,11 @@ class productPage {
   }
 
   async getPriceOfProduct(productName) {
-    const productPrice = await this.action.getFirstInnerText(
+    let productPrice = await this.action.getFirstInnerText(
       productObject.productPrice.replace('?????', productName),
       productName
     );
+    productPrice = await this.businessMethod.cleanPriceText(productPrice);
     return productPrice;
   }
 
