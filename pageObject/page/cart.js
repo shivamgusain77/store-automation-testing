@@ -18,6 +18,9 @@ class cartPage {
     this.cartPageBreadcrumb = "//section[@id='cart_items']//ol/li[text()='Shopping Cart']";
     this.emptyCartMessage = "//span[@id='empty_cart']//b[text()='Cart is empty!']";
     this.checkoutButton = "//a[contains(@class,'check_out') and text()='Proceed To Checkout']";
+    this.loginModal = "//div[@id='checkoutModal']";
+    this.loginModelMessage =
+      "//div[@class='modal-body']/p[text()='Register / Login account to proceed on checkout.']";
   }
 
   async verifyItemInCart(productName, productPrice) {
@@ -86,6 +89,16 @@ class cartPage {
 
   async clickOnCheckout() {
     await this.action.click(this.checkoutButton, 'checkout page button');
+  }
+
+  async verifyCheckoutButton() {
+    await this.assert.verifyElementVisible(this.checkoutButton, 'checkout botton');
+    await this.assert.verifyElementEnabled(this.checkoutButton, 'checkout buton');
+  }
+
+  async verifyLoginMessage() {
+    await this.action.waitForElement(this.loginModal, 'login modal');
+    await this.assert.verifyElementVisible(this.loginModelMessage, 'login modal message');
   }
 }
 

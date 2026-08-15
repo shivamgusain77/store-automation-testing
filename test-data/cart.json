@@ -15,6 +15,18 @@
       "data": {
         "productName": ["Blue Top", "Winter Top"]
       }
+    },
+    {
+      "testname": "TC-03 Cart Validation - verify checkout button",
+      "data": {
+        "productName": "Blue Top"
+      }
+    },
+    {
+      "testname": "TC-05 Cart Validation - verify checkout without login",
+      "data": {
+        "productName": "Blue Top"
+      }
     }
   ]
 }
