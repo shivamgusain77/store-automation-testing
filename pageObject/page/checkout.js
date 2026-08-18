@@ -18,6 +18,7 @@ class checkoutPage {
     this.totalCartPrice = "//b[text()='Total Amount']/ancestor::td/following-sibling::td/p";
     this.placeOrderButton = "//a[text()='Place Order']";
     this.checkoutPageBreadcrumb = "//section[@id='cart_items']//ol/li[text()='Checkout']";
+    this.placeOrderButton = "//div[@id='ordermsg']/following-sibling::div/a[text()='Place Order']";
   }
 
   async getTotalCartPrice() {
@@ -38,6 +39,10 @@ class checkoutPage {
   async verifyCheckoutPageLoaded() {
     await this.assert.verifyURL(/\/checkout$/, 'checkout page');
     await this.assert.verifyElementVisible(this.checkoutPageBreadcrumb, 'checkout page breadcrumb');
+  }
+
+  async clickOnPlaceOrder() {
+    await this.action.click(this.placeOrderButton, 'place order button');
   }
 }
 

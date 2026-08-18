@@ -27,6 +27,18 @@
       "data": {
         "productName": "Blue Top"
       }
+    },
+    {
+      "testname": "TC-06 Cart Validation - verify payment page load sucessfully",
+      "data": {
+        "productName": "Blue Top"
+      }
+    },
+    {
+      "testname": "TC-07 Cart Validation - verify empty payment field",
+      "data": {
+        "productName": "Blue Top"
+      }
     }
   ]
 }
