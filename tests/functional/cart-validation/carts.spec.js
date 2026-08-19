@@ -273,4 +273,88 @@ test.describe('Product Validation Test Suite', () => {
       await pageObjectContext.getCartPage().deleteItemsFromCart();
     });
   });
+
+  test('TC-08 Cart Validation - sucessful order placed', async () => {
+    await test.step('Navigate to the application', async () => {
+      await pageObjectContext.getAction().navigateToURL(runconfig.siteURl);
+    });
+
+    await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
+      await pageObjectContext.getStorePage().clickOnProductsButton();
+    });
+
+    await test.step(`Add ${testData.productName} to cart`, async () => {
+      await pageObjectContext.getProductPage().addProductToCart(testData.productName);
+    });
+
+    await test.step('Click on cart icon', async () => {
+      await pageObjectContext.getProductPage().clickOnCart();
+    });
+
+    await test.step('Click on checkout button', async () => {
+      await pageObjectContext.getCartPage().clickOnCheckout();
+    });
+
+    await test.step('Click on place order button', async () => {
+      await pageObjectContext.getCheckoutPage().clickOnPlaceOrder();
+    });
+
+    await test.step('Fill payment details', async () => {
+      await pageObjectContext.getPaymentPage().fillPaymentDetails(testData);
+    });
+
+    await test.step('Click on pay and confirm order', async () => {
+      await pageObjectContext.getPaymentPage().clickOnPayAndConfirmOrder();
+    });
+
+    await test.step('Verify order placed sucessfully', async () => {
+      await pageObjectContext.getPaymentPage().verifyOrderPlacedMessage();
+    });
+  });
+
+  test('TC-09 Cart Validation - download and validate invoice after placing order', async () => {
+    await test.step('Navigate to the application', async () => {
+      await pageObjectContext.getAction().navigateToURL(runconfig.siteURl);
+    });
+
+    await test.step('Navigate to product page', async () => {
+      await pageObjectContext.getBusinessMethod().closeAdPopup();
+      await pageObjectContext.getStorePage().clickOnProductsButton();
+    });
+
+    await test.step(`Add ${testData.productName} to cart`, async () => {
+      await pageObjectContext.getProductPage().addProductToCart(testData.productName);
+    });
+
+    await test.step(`Get ${testData.productName} price`, async () => {
+      productPrice = await pageObjectContext
+        .getProductPage()
+        .getPriceOfProduct(testData.productName);
+    });
+
+    await test.step('Click on cart icon', async () => {
+      await pageObjectContext.getProductPage().clickOnCart();
+    });
+
+    await test.step('Click on checkout button', async () => {
+      await pageObjectContext.getCartPage().clickOnCheckout();
+    });
+
+    await test.step('Click on place order button', async () => {
+      await pageObjectContext.getCheckoutPage().clickOnPlaceOrder();
+    });
+
+    await test.step('Fill payment details', async () => {
+      await pageObjectContext.getPaymentPage().fillPaymentDetails(testData);
+    });
+
+    await test.step('Click on pay and confirm order', async () => {
+      await pageObjectContext.getPaymentPage().clickOnPayAndConfirmOrder();
+    });
+
+    await test.step('Click on download invoice and validate the content', async () => {
+      await pageObjectContext.getPaymentPage().verifyOrderPlacedMessage(productPrice);
+    });
+  });
 });

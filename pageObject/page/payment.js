@@ -27,6 +27,7 @@ class paymentPage {
       "//label[@class='control-label' and text()='Card Number']/following-sibling::input";
     this.expirationDateInput =
       "//label[@class='control-label' and text()='Expiration']/following-sibling::input";
+    this.expirationYearInput = "//input[@data-qa='expiry-year']";
     this.payAndConfirmButon = "//button[@id='submit']";
     this.orderPlacedMessage = "//h2[@data-qa='order-placed']/b";
     this.downloadInvoiceButton = "//a[text()='Download Invoice']";
@@ -58,6 +59,34 @@ class paymentPage {
     await this.assert.verifyBorwserErrorMessage(
       this.nameOnCardInput,
       'Please fill out this field.'
+    );
+  }
+
+  async fillPaymentDetails(data) {
+    await this.action.fill(this.nameOnCardInput, data.nameOnCard, 'name on card');
+    await this.action.fill(this.CVVInput, data.CVV, 'CVV');
+    await this.action.fill(this.cardNumberInput, data.cardNumber, 'card number');
+    await this.action.fill(this.expirationDateInput, data.expirationDate, 'expiration date');
+    await this.action.fill(this.expirationYearInput, data.expirationYear, 'expiration year');
+  }
+
+  async verifyOrderPlacedMessage() {
+    await this.assert.verifyElementVisible(this.orderPlacedMessage, 'order placed message');
+  }
+
+  async clickOnContinue() {
+    await this.action.click(this.continueButton, 'continue button');
+  }
+
+  async clickOnDownloadInvoice() {
+    await this.action.click(this.downloadInvoiceButton, 'download invoice button');
+  }
+
+  async verifyOrderPlacedMessage(price) {
+    const fileText = await this.action.fileDownloadText(this.downloadInvoiceButton);
+    await this.assert.verifyTextConatins(
+      fileText,
+      `Your total purchase amount is ${price}. Thank you`
     );
   }
 }

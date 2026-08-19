@@ -39,6 +39,28 @@
       "data": {
         "productName": "Blue Top"
       }
+    },
+    {
+      "testname": "TC-08 Cart Validation - sucessful order placed",
+      "data": {
+        "productName": "Blue Top",
+        "nameOnCard": "Tester",
+        "CVV": "12345",
+        "cardNumber": "99999999",
+        "expirationDate": "1",
+        "expirationYear": "2030"
+      }
+    },
+    {
+      "testname": "TC-09 Cart Validation - download and validate invoice after placing order",
+      "data": {
+        "productName": "Blue Top",
+        "nameOnCard": "Tester",
+        "CVV": "12345",
+        "cardNumber": "99999999",
+        "expirationDate": "1",
+        "expirationYear": "2030"
+      }
     }
   ]
 }

@@ -1,4 +1,5 @@
 import { test } from '@playwright/test';
+const fs = require('fs');
 
 class action {
   constructor(page, expect, context) {
@@ -164,6 +165,15 @@ class action {
   async getAllInnerText(selector, elementName) {
     console.log(`[INFO] Getting all inner text of ${elementName}`);
     return await this.page.locator(selector).allInnerTexts();
+  }
+
+  async fileDownloadText(selector) {
+    const downloadPromise = this.page.waitForEvent('download');
+    await this.click(selector, 'download button');
+    const download = await downloadPromise;
+    const filePath = await download.path();
+    const fileText = fs.readFileSync(filePath, 'utf8');
+    return fileText;
   }
 }
 
