@@ -13,7 +13,8 @@
     {
       "testname": "TC-03 Login Validation - Invalid Username",
       "data": {
-        "invalidUsername": "qwert"
+        "invalidUsername": "qwert",
+        "errorMessage": "Please include an '@' in the email address."
       }
     },
     {

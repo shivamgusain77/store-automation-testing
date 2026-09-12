@@ -104,6 +104,17 @@ class assertion {
       throw new Error('Element : ' + elementName + ' is not enabled. ' + error.message);
     }
   }
+
+  async verifyElementText(selector, expectedText, elementName) {
+    const element = this.page.locator(selector);
+    try {
+      await this.expect(element, elementName + ' should be visible').toHaveText(expectedText);
+    } catch (error) {
+      throw new Error(
+        'Element : ' + elementName + ` test not equall to ${expectedText} ` + error.message
+      );
+    }
+  }
 }
 
 module.exports = { assertion };

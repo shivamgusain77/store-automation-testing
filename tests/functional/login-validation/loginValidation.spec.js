@@ -28,7 +28,7 @@ test.describe('Login Validation Test Suite', async () => {
     });
 
     await test.step('Fill valid username and password and submit', async () => {
-      await pageObjectContext.getStorePage().performLogin(testData, 'correct');
+      await pageObjectContext.getStorePage().performLogin('correct', testData);
     });
 
     await test.step('Verify sucesfully logined as' + runconfig.username, async () => {
@@ -42,7 +42,7 @@ test.describe('Login Validation Test Suite', async () => {
     });
 
     await test.step('Fill valid username and invalid password and submit', async () => {
-      await pageObjectContext.getStorePage().performLogin(testData, 'invalid password');
+      await pageObjectContext.getStorePage().performLogin('invalid password', testData);
     });
 
     await test.step('Verify error message', async () => {
@@ -56,11 +56,11 @@ test.describe('Login Validation Test Suite', async () => {
     });
 
     await test.step('Fill valid username and invalid password and submit', async () => {
-      await pageObjectContext.getStorePage().performLogin(testData, 'invalid username');
+      await pageObjectContext.getStorePage().performLogin('invalid username', testData);
     });
 
     await test.step('Verify error message', async () => {
-      await pageObjectContext.getStorePage().verifyErrorMessageDisplayed();
+      await pageObjectContext.getStorePage().verifyInvalidLoginEmail(testData.errorMessage);
     });
   });
 
@@ -70,11 +70,10 @@ test.describe('Login Validation Test Suite', async () => {
     });
 
     await test.step('Fill valid username and password and submit', async () => {
-      await pageObjectContext.getStorePage().performLogin(testData, 'correct');
+      await pageObjectContext.getStorePage().performLogin('correct', testData);
     });
 
-    await test.step('Click on burger icon and logout', async () => {
-      await pageObjectContext.getStorePage().clickOnBurgericon();
+    await test.step('Click on logout', async () => {
       await pageObjectContext.getStorePage().loggOutUser();
     });
 
@@ -89,7 +88,7 @@ test.describe('Login Validation Test Suite', async () => {
     });
 
     await test.step('Fill valid username and password and submit', async () => {
-      await pageObjectContext.getStorePage().performLogin(testData, 'correct');
+      await pageObjectContext.getStorePage().performLogin('correct', testData);
     });
 
     await test.step('refresh the page', async () => {

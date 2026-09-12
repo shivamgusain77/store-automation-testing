@@ -12,6 +12,15 @@ class storePage {
 
     this.action = new action(this.page, this.except, this.context);
     this.assert = new assertion(this.page, this.except, this.context);
+
+    this.logInButton = "//button[@data-qa='login-button']";
+    this.userNameInput = "//input[@data-qa='login-email']";
+    this.passwordInput = "//input[@data-qa='login-password']";
+    this.loginLabel = "//h2[text()='Login to your account']";
+    this.loggedInUserName = "//a[text()=' Logged in as ']/b";
+    this.loginErrorMessage = "//p[contains(text(),'Your email or password is incorrect!')]";
+    this.logoutButton = "//a[text()=' Logout']";
+    this.loginForm = "//div[@class='login-form']";
   }
 
   async verifyNavigationMenuVisible() {
@@ -31,35 +40,38 @@ class storePage {
   }
 
   async performLogin(operation, data = {}) {
-    await this.action.waitForElement(storeObject.loginLabel, 'login page logo');
+    await this.action.waitForElement(this.loginLabel, 'login page logo');
     switch (operation) {
       case 'correct':
-        await this.action.fill(storeObject.userNameInput, runconfig.email, 'input username');
-        await this.action.fill(storeObject.passwordInput, runconfig.password, 'input password');
+        await this.action.fill(this.userNameInput, runconfig.email, 'input username');
+        await this.action.fill(this.passwordInput, runconfig.password, 'input password');
         break;
 
       case 'invalid password':
-        await this.action.fill(storeObject.userNameInput, runconfig.email, 'input username');
-        await this.action.fill(storeObject.passwordInput, data.invalidPassword, 'input password');
+        await this.action.fill(this.userNameInput, runconfig.email, 'input username');
+        await this.action.fill(this.passwordInput, data.invalidPassword, 'input password');
         break;
 
       case 'invalid username':
-        await this.action.fill(storeObject.userNameInput, data.invalidUsername, 'input username');
-        await this.action.fill(storeObject.passwordInput, runconfig.password, 'input password');
+        await this.action.fill(this.userNameInput, data.invalidUsername, 'input username');
+        await this.action.fill(this.passwordInput, runconfig.password, 'input password');
         break;
     }
 
-    await this.action.click(storeObject.logInButton, 'login Button');
+    await this.action.click(this.logInButton, 'login Button');
   }
 
   async verifyLogin() {
-    await this.action.waitForElement(storeObject.loginAppLogo, 'logged in logo');
-    await this.assert.verifyElementVisible(storeObject.loginAppLogo, 'logged in logo');
+    await this.assert.verifyElementText(
+      this.loggedInUserName,
+      runconfig.username,
+      'logged in username'
+    );
   }
 
   async verifyErrorMessageDisplayed() {
     await this.action.waitForTimeout(2000);
-    await this.assert.verifyElementVisible(storeObject.loginErrorMessage, 'error message');
+    await this.assert.verifyElementVisible(this.loginErrorMessage, 'error message');
   }
 
   async clickOnBurgericon() {
@@ -67,11 +79,11 @@ class storePage {
   }
 
   async loggOutUser() {
-    await this.action.click(storeObject.logoutButton, 'logout button');
+    await this.action.click(this.logoutButton, 'logout button');
   }
 
   async verifyLoginPageLogo() {
-    await this.assert.verifyElementVisible(storeObject.loginLabel, 'login page logo');
+    await this.assert.verifyElementVisible(this.loginForm, 'login form');
   }
 
   async signUp(signUpName, signUpEmail) {
@@ -167,6 +179,10 @@ class storePage {
   async clickOnProductsButton() {
     await this.action.click(storeObject.productsButton, 'products button');
     await this.action.waitForUrl('/products');
+  }
+
+  async verifyInvalidLoginEmail(invalidInputErrorMessage) {
+    await this.assert.verifyBorwserErrorMessage(this.userNameInput, invalidInputErrorMessage);
   }
 }
 
